@@ -28,12 +28,12 @@ fun main(args: Array<String>) {
 
     // 플레이어의 상태 출력
     printPlayerStatus(auraColor, isBlessed, name, healthStatus)
-    castFireball(5)
+    castFireball()
 }
 
 // 함수 매개변수 : 항상 읽기 전용
-private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean): String {
-    val healthStatus = when (healthPoints) {
+private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean) =
+    when (healthPoints) {
         100 -> "최상의 상태임!"
         in 90..99 -> "약간의 찰과상만 있음."
         in 75..89 -> if (isBlessed) {
@@ -45,8 +45,7 @@ private fun formatHealthStatus(healthPoints: Int, isBlessed: Boolean): String {
         in 15..74 -> "많이 다친 것 같음."
         else -> "최악의 상태임!"
     }
-    return healthStatus
-}
+
 
 private fun printPlayerStatus(
     auraColor: String,
@@ -64,6 +63,22 @@ private fun auraColor(isBlessed: Boolean, healthPoints: Int, isImmortal: Boolean
     return auraColor
 }
 
-private fun castFireball(numFireballs: Int) {
+private fun castFireball(numFireballs: Int = 2) =
     println("한 덩어리의 파이어볼이 나타난다. (x$numFireballs)")
+
+// 오버로딩
+fun performCombat() {
+    println("적군이 없다!")
+}
+
+fun performCombat(enemyName: String) {
+    println("$enemyName 과 전투를 시작함.")
+}
+
+fun performCombat(enemyName: String, isBlessed: Boolean) {
+    if (isBlessed) {
+        println("$enemyName 과 전투를 시작함. 축복을 받음!")
+    } else {
+        println("$enemyName 과 전투를 시작함.")
+    }
 }
